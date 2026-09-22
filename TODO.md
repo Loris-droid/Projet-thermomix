@@ -1,8 +1,8 @@
 #TODO  
-Recherche Pico + ESP32  
-recherche api flask  
-test api:  
--charger page  
--envoyer données  
--poll  
--commencer a construire html + js  
+- [ ] Recherche Pico + ESP32  
+- [ ] Recherche api flask  
+Api:  
+- [ ] Charger page  
+- [ ] Envoyer données  
+- [ ] Poll  
+- [ ] Commencer a construire html + js  
