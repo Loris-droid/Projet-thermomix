@@ -2,4 +2,4 @@ flash peut etre pas opti pour ca
 possibilité de plusieur language pour faire serveur :  
 html/css/js en front 
 pas possible de faire directement avec flask (trop de surcharge)
-possibilité avec websockets/node.js
+possibilité avec websockets/node.js ou flask avec websocket
