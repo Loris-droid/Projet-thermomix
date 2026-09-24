@@ -1,4 +1,4 @@
-corrige ca Voici le tuto pour faire le serveur Flask :
+Voici le tuto pour faire le serveur Flask :
 installer Flask avec : pip install Flask
 ensuite il faut créer un dossier pour votre projet
 puis dans ce dossier créer un fichier serveur.py qui contiendra votre code Flask
