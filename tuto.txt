@@ -1,0 +1,23 @@
+corrige ca Voici le tuto pour faire le serveur Flask :
+installer Flask avec : pip install Flask
+ensuite il faut créer un dossier pour votre projet
+puis dans ce dossier créer un fichier serveur.py qui contiendra votre code Flask
+mettre au tout début from flask import Flask, render_template pour que cela charge Flask à chaque fois
+puis commencer à construire vos routes pour votre API
+commencer par :
+@app.route("/") définit la route qu'il faudra mettre après l'IP
+def index() : définit la fonction à utiliser quand cette route est chargée
+    return render_template("index.html") et enfin fait le rendu de la page HTML si elle existe, sinon juste du HTML mis dans la fonction render
+    pour que le HTML puisse être trouvé, il faut le mettre dans un dossier templates dans le même dossier que votre fichier serveur.py
+    ensuite, dans le HTML, construire deux boutons :
+    le premier qui est le bouton On pour la LED, il faut faire :
+<a href="/on">
+    <button class="bouton" id="on">On</button>
+</a>
+    cela permet d'exécuter le code qu'il y a dans la fonction de la route /on
+    pour faire s'allumer la LED, il faudra importer GPIO Zero :
+from gpiozero import LED
+    définir l'emplacement de la LED :
+led = LED(17)
+    et enfin mettre led.on dans la fonction de la route /on et normalement la LED s'allume
+    pour afficher un petit voyant quand la LED est allumée, il faut :
