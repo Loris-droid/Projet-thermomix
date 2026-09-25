@@ -20,4 +20,4 @@ from gpiozero import LED
     définir l'emplacement de la LED :
 led = LED(17)
     et enfin mettre led.on dans la fonction de la route /on et normalement la LED s'allume
-    pour afficher un petit voyant quand la LED est allumée, il faut :
+    pour afficher un petit voyant quand la LED est allumée, il faut :  
