@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8" />
+    <title>Accueil</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <script src="https://cdn.socket.io/4.7.5/socket.io.min.js"></script>
+
+  </head>
+  <body>
+    <h1>LED</h1>
+    <div id="statut-bouton">
+      {% if bouton_presse %}
+          <p>Le bouton est appuyé</p>
+      {% else %}
+         <p>Le bouton est relâché</p>
+      {% endif %}
+    </div>
+
+    <a href="/on">
+        <button class="bouton" id="on">On</button>
+    </a>       
+    <a href="/off">
+        <button class="bouton" id="off">off</button>
+    </a>
+
+    <script>
+        const socket = io();
+
+        socket.on("etat_bouton", (data) => {
+
+            const divStatut = document.getElementById("statut-bouton");
+            if (data === true) {
+                divStatut.innerHTML =
+                    "<p>Le bouton est appuyé</p>";
+            } else {
+                divStatut.innerHTML =
+                    "<p>Le bouton est relâché</p>";
+            }
+        });
+    </script>
+  </body>
+</html>
