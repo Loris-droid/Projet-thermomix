@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Écran Thermomix</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.csss') }}">
+    <script src="https://cdn.socket.io/4.7.5/socket.io.min.js"></script>
+</head>
+<body class="fond-thermomix">
+    <main class="ecran-thermomix">
+        <div class="haut-ecran">
+            <span>RECETTE</span>
+            <span id="progression">1 / 4</span>
+        </div>
+
+        <h1 id="titre">Chargement...</h1>
+        <p id="description"></p>
+
+        <div class="reglages">
+            <div class="reglage">
+                <span>Temps</span>
+                <strong id="temps">--:--</strong>
+            </div>
+            <div class="reglage">
+                <span>Température</span>
+                <strong id="temperature">-- °C</strong>
+            </div>
+            <div class="reglage">
+                <span>Vitesse</span>
+                <strong id="vitesse">--</strong>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        const socket = io();
+
+        socket.on("etape", function (data) {
+            document.getElementById("progression").textContent =
+                (data.numero + 1) + " / " + data.total;
+            document.getElementById("titre").textContent = data.contenu.titre;
+            document.getElementById("description").textContent = data.contenu.description;
+            document.getElementById("temps").textContent = data.contenu.temps;
+            document.getElementById("temperature").textContent = data.contenu.temperature;
+            document.getElementById("vitesse").textContent = data.contenu.vitesse;
+        });
+    </script>
+</body>
+</html>
