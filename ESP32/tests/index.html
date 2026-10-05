@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <title>ESP32 WebSocket</title>
+
+</head>
+
+
+<body>
+
+    <h1>ESP32</h1>
+
+
+    <p>
+        Bouton :
+        <strong id="bouton">---</strong>
+    </p>
+
+
+    <p>
+        LED :
+        <strong id="led">---</strong>
+    </p>
+
+    <h1>Contrôle de la LED</h1>
+
+        <button type="button" onclick="allumerLED()">
+            Cliquez ici
+        </button>
+
+    <script>
+
+        // Adresse WebSocket de l'ESP32
+        let websocket = new WebSocket(
+            "ws://" + window.location.host
+        );
+
+
+        // Connexion établie
+        websocket.onopen = function() {
+
+            console.log("WebSocket connecté");
+
+        };
+
+
+        // Message reçu de l'ESP32
+        websocket.onmessage = function(event) {
+
+            console.log("Message reçu :", event.data);
+
+
+            let valeurs = event.data.split(",");
+
+
+            document.getElementById("bouton").innerHTML = valeurs[0];
+
+            document.getElementById("led").innerHTML = valeurs[1];
+
+        };
+
+
+        // Connexion fermée
+        websocket.onclose = function() {
+
+            console.log("WebSocket déconnecté");
+
+        };
+
+
+        // Erreur
+        websocket.onerror = function(error) {
+
+            console.log("Erreur WebSocket :", error);
+
+        };
+        
+        // Fonction appelée lorsque le bouton est cliqué
+        function allumerLED() {
+
+            websocket.send("ON");
+
+        }
+
+    </script>
+
+</body>
+
+</html>
