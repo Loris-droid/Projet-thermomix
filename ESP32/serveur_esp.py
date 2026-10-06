@@ -7,10 +7,6 @@ try :
 except :
     import socket
 
-# On définit l'entrée analogique utilisée
-capt_analog = ADC(Pin(35)) # on crée l'objet connecté sur la broche 35
-capt_analog.width(ADC.WIDTH_12BIT) # Pour 4096 valeurs
-capt_analog.atten(ADC.ATTN_11DB)
 # Code HTML de la page Web renvoyée par le serveur
 with open("index.html", "r") as file:
     html = file.read()
@@ -42,11 +38,10 @@ while True :
     requete= client_s.recv(4096)
     print("Adresse IP du client connecte=", client_addr)
     print("Requete recue=", requete)
-    val_capt_analog=capt_analog.read()
     client_s.send(b'HTTP/1.1.200 OK\r\n')
     client_s.send(b'Content-Type: text/html\r\n')
     client_s.send(b'Connection: close\r\n')
     client_s.send(b'\r\n')
-    client_s.send(html) #code HTML envoyé au client
+    client_s.send(html.encode()) #code HTML envoyé au client
     client_s.close()
     print()

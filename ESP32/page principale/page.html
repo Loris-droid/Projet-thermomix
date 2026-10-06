@@ -1,17 +1,65 @@
 <!DOCTYPE html>
+
 <html>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bras Robot</title>
 </head>
+
 <body>
 
-    <h1>Bras Robot</h1>
+<h1>Controle de la led</h1>
 
-    <h2></h2>
-    <button>Cliquez ici</button>
+<h2 id="led">État de la LED : Éteinte</h2>
 
+<h2 id="bouton">État du bouton : Relâché</h2>
+
+<button onclick="changerEtat()">
+    Activer / desactiver la led
+</button>
+
+
+<script>
+
+    let Led = false;
+    let Bouton = false;
+
+
+    function changerEtat() {
+
+        // On inverse les états
+        Led = !Led;
+        Bouton = !Bouton;
+
+
+        // On change l'affichage sur le site
+        if (Led) {
+
+            document.getElementById("led").textContent =
+                "État de la LED : Allumée";
+
+            document.getElementById("bouton").textContent =
+                "État du bouton : Appuyé";
+
+            // On demande à l'ESP32 d'allumer la LED
+            fetch("/led/on");
+
+        } 
+        else {
+
+            document.getElementById("led").textContent =
+                "État de la LED : Éteinte";
+
+            document.getElementById("bouton").textContent =
+                "État du bouton : Relâché";
+
+            // On demande à l'ESP32 d'éteindre la LED
+            fetch("/led/off");
+        }
+    }
+
+</script>
 
 </body>
 </html>

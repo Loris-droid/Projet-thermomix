@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bras Robot</title>
+</head>
+
+<body>
+
+<h1>Contrôle de la LED</h1>
+
+<h2 id="led">État de la LED : Éteinte</h2>
+
+<h2 id="bouton">État du bouton : Relâché</h2>
+
+<button onclick="changerEtat()">
+    Activer / désactiver la LED
+</button>
+
+
+<script>
+
+    // Cette fonction est lancée quand on clique sur
+    // le bouton du site
+    function changerEtat() {
+
+        fetch("/changer");
+
+    }
+
+
+    // Cette fonction demande à l'ESP32
+    // quel est l'état actuel de la LED
+    function actualiserEtat() {
+
+        fetch("/etat")
+            .then(response => response.text())
+            .then(etat => {
+
+                if (etat == "1") {
+
+                    document.getElementById("led").textContent =
+                        "État de la LED : Allumée";
+
+                    document.getElementById("bouton").textContent =
+                        "État du bouton : Appuyé";
+
+                } else {
+
+                    document.getElementById("led").textContent =
+                        "État de la LED : Éteinte";
+
+                    document.getElementById("bouton").textContent =
+                        "État du bouton : Relâché";
+                }
+
+            });
+    }
+
+
+    // On vérifie l'état quand la page est ouverte
+    actualiserEtat();
+
+</script>
+
+</body>
+</html>
