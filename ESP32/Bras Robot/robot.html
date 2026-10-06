@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bras Robot</title>
+    <link rel="stylesheet" href="robot.css">
+</head>
+
+<body>
+
+<h1>Bras Robot</h1>
+
+<div class="etats">
+    <h2 id="led">État de la LED : Éteinte</h2>
+    <h2>|</h2>
+    <h2 id="bouton">État du bouton : Relâché</h2>
+</div>
+
+<button class="bouton" onclick="changerEtat()">Activer / desactiver la led</button>
+
+<script>
+    let Led = false;
+    let Bouton = false;
+
+    function changerEtat() {
+
+        Led = !Led;
+        Bouton = !Bouton;
+
+        document.getElementById("led").textContent =
+            Led ? "État de la LED : Allumée" : "État de la LED : Éteinte";
+
+        document.getElementById("bouton").textContent =
+            Bouton ? "État du bouton : Appuyé" : "État du bouton : Relâché";
+    }
+</script>
+
+</body>
+</html>
