@@ -21,21 +21,70 @@
 <button class="bouton" onclick="changerEtat()">Activer / desactiver la led</button>
 
 <script>
+
     let Led = false;
     let Bouton = false;
 
+
     function changerEtat() {
 
+        // On inverse les états
         Led = !Led;
         Bouton = !Bouton;
 
-        document.getElementById("led").textContent =
-            Led ? "État de la LED : Allumée" : "État de la LED : Éteinte";
 
-        document.getElementById("bouton").textContent =
-            Bouton ? "État du bouton : Appuyé" : "État du bouton : Relâché";
+        // On change l'affichage sur le site
+        if (Led) {
+
+            document.getElementById("led").textContent =
+                "État de la LED : Allumée";
+
+            document.getElementById("bouton").textContent =
+                "État du bouton : Appuyé";
+
+            // On demande à l'ESP32 d'allumer la LED
+            fetch("/led/on");
+
+        } 
+        else {
+
+            document.getElementById("led").textContent =
+                "État de la LED : Éteinte";
+
+            document.getElementById("bouton").textContent =
+                "État du bouton : Relâché";
+
+            // On demande à l'ESP32 d'éteindre la LED
+            fetch("/led/off");
+        }
     }
-</script>
 
+</script>
+<style>
+body {
+    background-color:#121212;
+    color: white;
+}
+h1 {
+    text-align: center;
+    font-size: 50px;
+    margin-top: 22vh;
+}
+.etats {
+    display: flex;
+    justify-content: center;
+    gap: 50px;
+}
+.bouton {
+    display: block;
+    margin: 12vh auto 0;
+    width: 150px;
+    height: 100px;
+    border-radius: 0;
+    background-color:#1DB954;
+    color: white;
+    font-size: 15px;
+}
+</style>
 </body>
 </html>

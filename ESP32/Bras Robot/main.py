@@ -1,7 +1,7 @@
 import network
 import time
 import ubinascii
-from machine import Pin, ADC
+from machine import Pin
 
 try:
     import usocket as socket
@@ -9,15 +9,15 @@ except:
     import socket
 
 
-# LED et bouton
+# LED 
 led = Pin(12, Pin.OUT)
-button = Pin(35, Pin.IN)
+
 # LED éteinte au démarrage
 led.value(0)
 
 
 # On ouvre la page HTML
-with open("index.html", "r") as file:
+with open("indx.html", "r") as file:
     html = file.read()
 
 
@@ -92,5 +92,4 @@ while True:
 
         client_s.close()
     except OSError:
-        pass
-        
+        pass   
